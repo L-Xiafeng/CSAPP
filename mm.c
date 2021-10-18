@@ -24,11 +24,11 @@
  ********************************************************/
 team_t team = {
     /* Team name */
-    "ateam",
+    "UESTC_GAY_HUB",
     /* First member's full name */
-    "Harry Bovik",
+    "Xiafeng~~~",
     /* First member's email address */
-    "bovik@cs.cmu.edu",
+    "xiafeng_li@qq.com",
     /* Second member's full name (leave blank if none) */
     "",
     /* Second member's email address (leave blank if none) */
@@ -127,23 +127,10 @@ static void* extend_heap(size_t words){
 /*
  * find_fit - use first fit strategy to find an empty block.
  */
-static void* last_find=NULL;
 static void *find_fit(size_t asize){
-    char * ptr =NULL;
-    if(last_find==NULL){
-        ptr  = heap_listp;
-    }else{
-        ptr = last_find;
-    }
-    for( ; GET_SIZE(HDRP(ptr)) > 0 ; ptr = NEXT_BLKP(ptr) ){
-        if( !GET_ALLOC(HDRP(ptr)) && (GET_SIZE(HDRP(ptr)) >= asize) ){
-            if(last_find==NULL)
-            {
-                last_find = ptr;
-                return ptr;
-                }else return ptr;
-        }
-
+    for(char * ptr = heap_listp ; GET_SIZE(HDRP(ptr)) > 0 ; ptr = NEXT_BLKP(ptr) ){
+        if( !GET_ALLOC(HDRP(ptr)) && (GET_SIZE(HDRP(ptr)) >= asize) )
+            return ptr;
     }
     return NULL;
 }
